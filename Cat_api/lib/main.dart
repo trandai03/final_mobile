@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cat_api/widgets/homepage.dart';
 import 'package:cat_api/widgets/register.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,8 +14,15 @@ Future<void> main() async {
             appId: "1:437172282524:web:fc2ab1f05e9ee4c38b7959",
             messagingSenderId: "437172282524",
             projectId: "shop-cat-eb9d3"));
-  }
-  await Firebase.initializeApp();
+  } else if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: "AIzaSyAT24ig8DHD_ONpO1STs91NoiS1ZqUdGjE",
+            appId: "1:437172282524:android:8bb0b3ad433a59088b7959",
+            messagingSenderId: "437172282524",
+            projectId: "shop-cat-eb9d3"));
+  } else
+    await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -24,6 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Cat Api",
       routes: {
         "/": (context) => MyHomePage(),
