@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
   google_fonts:
+  # add this line to your dependencies
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
