@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'dart:ui';
+
 import 'package:cat_api/widgets/home_page.dart';
-import 'package:cat_api/widgets/side_page/main_page.dart';
-import 'package:cat_api/widgets/side_page/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Cat Api",
-      home: Mainpage(),
+      home: HomePage(),
       routes: {
         "/homepage": (context) => HomePage(),
         // "/register": (context) => RegisterPage(showLoginPage: showLoginPage),
