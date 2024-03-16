@@ -2,12 +2,12 @@ import 'package:get/get.dart';
 
 import '../modules/cat.dart';
 import '../modules/network.dart';
-
+import '../modules/breeds.dart';
 class HomeController extends GetxController {
-  List<Breed> _myListBreeds = [];
+  List<CatBreeds> _myListBreeds = [];
   bool _isLoading = true;
 
-  List<Breed> get myListBreeds => _myListBreeds;
+  List<CatBreeds> get myListBreeds => _myListBreeds;
   bool get isLoading => _isLoading;
 
   @override
@@ -25,13 +25,7 @@ class HomeController extends GetxController {
     final network = Network();
     var response = await network.getListBreeds(params: params);
     if (response != null) {
-      _myListBreeds =
-          response as List<Breed>; // Assign only if response is not null
-      print("123");
-    } else {
-      // Handle the case where the response is null
-      print("Error: Network request failed or returned null.");
-      _myListBreeds = []; // Set an empty list to avoid further errors
+      _myListBreeds = response;
     }
 
     _isLoading = false;
@@ -44,3 +38,4 @@ class HomeController extends GetxController {
     }
   }
 }
+

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import '../modules/breeds.dart';
 
 import '../modules/cat.dart';
 import '../modules/common.dart';
@@ -34,11 +35,9 @@ class Network {
     Map<String, dynamic> params = const {},
   }) async {
     String content = '';
-    List<Breed> myListBreeds = [];
+    List<CatBreeds> myListBreeds = [];
 
-    content = (params.keys
-            .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
-        .join('&');
+    content = (params.keys.map((key) => '$key=${Uri.encodeQueryComponent(params[key])}')).join('&');
 
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -55,22 +54,20 @@ class Network {
       )
           .then((response) {
         if (response.statusCode == 200) {
-          List jsonList =
-              jsonDecode(response.body.replaceAll('\'', '')) as List;
-          myListBreeds = jsonList
-              .map((jsonElement) => Breed.fromJson(jsonElement))
-              .toList();
+          List jsonList = jsonDecode(response.body.replaceAll('\'', '')) as List;
+          myListBreeds = jsonList.map((jsonElement) => CatBreeds.fromJson(jsonElement)).toList();
         } else {
           myListBreeds = [];
-          debugPrint('Loi ket noi:');
+          debugPrint('Ha ocurrido un error:');
           debugPrint(response.statusCode.toString());
         }
       });
     } catch (e) {
-      debugPrint('Loi ket noi:');
+      debugPrint('Ha ocurrido un error:');
       debugPrint(e.toString());
       return [];
     }
+    return myListBreeds;
   }
 
   Future<dynamic> getDetailCat({
@@ -94,17 +91,16 @@ class Network {
       )
           .then((response) {
         if (response.statusCode == 200) {
-          var catDetailResponse = CatBreedsImage.fromJson(
-              jsonDecode(response.body.replaceAll('\'', '')));
+          var catDetailResponse = CatBreedsImage.fromJson(jsonDecode(response.body.replaceAll('\'', '')));
           catDetail = catDetailResponse;
         } else {
           catDetail = null;
-          debugPrint('Lỗi kết nối:');
+          debugPrint('Ha ocurrido un error:');
           debugPrint(response.statusCode.toString());
         }
       });
     } catch (e) {
-      debugPrint('Lỗi kết nối:');
+      debugPrint('Ha ocurrido un error:');
       debugPrint(e.toString());
       return null;
     }

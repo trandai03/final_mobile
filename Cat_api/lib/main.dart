@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
-
+import 'modules/routes.dart';
+import 'package:get/get.dart';
 import 'package:cat_api/widgets/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -32,17 +33,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      title: 'CatApp',
       debugShowCheckedModeBanner: false,
-      title: "Cat Api",
-      home: HomePage(),
-      routes: {
-        "/homepage": (context) => HomePage(),
-        // "/register": (context) => RegisterPage(showLoginPage: showLoginPage),
-        // "/login": (context) => MyLogin(),
-        // "/content": (context) => MyContent(),
-        // "/login": (context) => LoginPage(),
-      },
+      theme: ThemeData(
+        fontFamily: 'SFProMedium',
+
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          color: Colors.red,
+        ),
+      ),
+      initialRoute: '/home',
+      getPages: routes,
     );
+
+
+    // home: HomePage(),
+      // routes: {
+      //   "/homepage": (context) => HomePage(),
+      //   // "/register": (context) => RegisterPage(showLoginPage: showLoginPage),
+      //   // "/login": (context) => MyLogin(),
+      //   // "/content": (context) => MyContent(),
+      //   // "/login": (context) => LoginPage(),
+      // },
+
   }
 }

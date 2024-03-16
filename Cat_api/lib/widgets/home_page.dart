@@ -1,12 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:skeletons/skeletons.dart';
 import '../controllers/homeController.dart';
 import '../modules/cat.dart';
 import '../modules/common.dart';
 import '../modules/network.dart';
-
+import '../modules/breeds.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,79 +15,45 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Breed> BreedData = <Breed>[];
-
-  @override
-  void initState() {
-    super.initState();
-    Network.getCatImages().then((dataFromSever) {
-      setState(() {
-        BreedData = dataFromSever;
-      });
-    });
-  }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return GetBuilder<HomeController>(
-  //     init: HomeController(),
-  //     builder: (_) {
-  //       return Scaffold(
-  //         appBar: AppBar(
-  //           title: const Text('Cats Breeds'),
-  //         ),
-  //         body: Padding(
-  //           padding: const EdgeInsets.symmetric(
-  //             vertical: 20,
-  //             horizontal: 20,
-  //           ),
-  //           child: Skeleton(
-  //             skeleton: SkeletonListView(),
-  //             isLoading: _.isLoading,
-  //             child: ListView.builder(
-  //               itemCount: _.myListBreeds.length,
-  //               itemBuilder: (context, index) {
-  //                 Breed pokemon = _.myListBreeds[index];
-  //                 return _buildCards(index + 1, pokemon, _);
-  //               },
-  //             ),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  List<CatBreeds> BreedData = <CatBreeds>[];
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-        init: HomeController(),
-        builder: (_) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Cats Breeds'),
+      init: HomeController(),
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Cats Breeds'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: 20,
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 20,
-              ),
+            child: Skeleton(
+              skeleton: SkeletonListView(),
+              isLoading: _.isLoading,
               child: ListView.builder(
-                itemCount: BreedData.length,
+                itemCount: _.myListBreeds.length,
                 itemBuilder: (context, index) {
-                  Breed pokemon = BreedData[index];
+                  CatBreeds pokemon = _.myListBreeds[index];
                   return _buildCards(index + 1, pokemon, _);
                 },
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
-  Widget _buildCards(int index, Breed breed, HomeController _) {
+
+
+  Widget _buildCards(int index, CatBreeds catbreeds, HomeController _) {
     return InkWell(
       onTap: () {
-        _.goToDetail(breed.referenceImageId ?? '');
+        _.goToDetail(catbreeds.referenceImageId ?? '');
       },
       child: Card(
         elevation: 5,
@@ -98,19 +64,18 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Name:  ${breed.name}',
-                style: Theme.of(Get.context!).textTheme.bodyText1,
+                'Raza:  ${catbreeds.name}',
+
               ),
               const SizedBox(
                 height: 12,
               ),
               Center(
                 child: Image.network(
-                  '${Common().baseUrlImageCats}${breed.referenceImageId}.jpg',
+                  '${Common().baseUrlImageCats}${catbreeds.referenceImageId}.jpg',
                   height: 180,
                   fit: BoxFit.scaleDown,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Swing(
                       infinite: true,
@@ -118,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                         heightFactor: 2,
                         child: Image.network(
                           Common().baseUrlLoadingCats,
-                          color: Colors.red,
+
                           width: 70,
                         ),
                       ),
@@ -135,12 +100,12 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Origin: ${breed.origin}',
-                    style: Theme.of(Get.context!).textTheme.bodyText1,
+                    'Origin: ${catbreeds.origin}',
+
                   ),
                   Text(
-                    'Intelligence: ${breed.intelligence}',
-                    style: Theme.of(Get.context!).textTheme.bodyText1,
+                    'Intelligent: ${catbreeds.intelligence}',
+
                   ),
                 ],
               ),
