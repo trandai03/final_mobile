@@ -32,6 +32,7 @@
   <title>cat_api</title>
   <link rel="manifest" href="manifest.json">
 
+
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;
@@ -40,6 +41,9 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <script>
+    window.flutterWebRenderer = "html";
+  </script>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

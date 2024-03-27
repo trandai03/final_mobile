@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:cat_api/widgets/side_page/main_page.dart';
+
 import 'modules/routes.dart';
 import 'package:get/get.dart';
 import 'package:cat_api/widgets/home_page.dart';
@@ -38,26 +40,23 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'SFProMedium',
-
         primarySwatch: Colors.blue,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           color: Colors.red,
         ),
       ),
-      initialRoute: '/home',
+      initialRoute: '/main_page',
       getPages: routes,
     );
 
-
     // home: HomePage(),
-      // routes: {
-      //   "/homepage": (context) => HomePage(),
-      //   // "/register": (context) => RegisterPage(showLoginPage: showLoginPage),
-      //   // "/login": (context) => MyLogin(),
-      //   // "/content": (context) => MyContent(),
-      //   // "/login": (context) => LoginPage(),
-      // },
-
+    // routes: {
+    //   "/homepage": (context) => HomePage(),
+    //   // "/register": (context) => RegisterPage(showLoginPage: showLoginPage),
+    //   // "/login": (context) => MyLogin(),
+    //   // "/content": (context) => MyContent(),
+    //   // "/login": (context) => LoginPage(),
+    // },
   }
 }

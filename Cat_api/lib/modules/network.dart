@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,6 +38,9 @@ class Network {
     content = (params.keys
             .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
         .join('&');
+    content = (params.keys
+            .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
+        .join('&');
 
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -60,13 +62,6 @@ class Network {
           myListBreeds = jsonList
               .map((jsonElement) => CatBreeds.fromJson(jsonElement))
               .toList();
-
-          if (query != "" && query != null) {
-            myListBreeds = myListBreeds
-                .where((element) =>
-                    element.name.toLowerCase().contains(query.toLowerCase()))
-                .toList();
-          }
         } else {
           myListBreeds = [];
           debugPrint('Loi ket noi:');
@@ -104,8 +99,6 @@ class Network {
         if (response.statusCode == 200) {
           var catDetailResponse = CatBreedsImage.fromJson(
               jsonDecode(response.body.replaceAll('\'', '')));
-          print(response.body);
-          print(catDetailResponse);
           catDetail = catDetailResponse;
         } else {
           catDetail = null;
