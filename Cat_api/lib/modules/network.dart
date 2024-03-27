@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../modules/breeds.dart';
@@ -37,7 +36,9 @@ class Network {
     String content = '';
     List<CatBreeds> myListBreeds = [];
 
-    content = (params.keys.map((key) => '$key=${Uri.encodeQueryComponent(params[key])}')).join('&');
+    content = (params.keys
+            .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
+        .join('&');
 
     final Map<String, String> headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -54,8 +55,11 @@ class Network {
       )
           .then((response) {
         if (response.statusCode == 200) {
-          List jsonList = jsonDecode(response.body.replaceAll('\'', '')) as List;
-          myListBreeds = jsonList.map((jsonElement) => CatBreeds.fromJson(jsonElement)).toList();
+          List jsonList =
+              jsonDecode(response.body.replaceAll('\'', '')) as List;
+          myListBreeds = jsonList
+              .map((jsonElement) => CatBreeds.fromJson(jsonElement))
+              .toList();
         } else {
           myListBreeds = [];
           debugPrint('Ha ocurrido un error:');
@@ -91,7 +95,8 @@ class Network {
       )
           .then((response) {
         if (response.statusCode == 200) {
-          var catDetailResponse = CatBreedsImage.fromJson(jsonDecode(response.body.replaceAll('\'', '')));
+          var catDetailResponse = CatBreedsImage.fromJson(
+              jsonDecode(response.body.replaceAll('\'', '')));
           catDetail = catDetailResponse;
         } else {
           catDetail = null;
