@@ -35,7 +35,6 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Text(
                         'Name:  ${_.catDetail?.breeds.first.name ?? ''}',
-
                       ),
                       const SizedBox(
                         height: 12,
@@ -45,7 +44,8 @@ class DetailPage extends StatelessWidget {
                           '${Common().baseUrlImageCats}${_.catDetail?.breeds.first.referenceImageId ?? _.idCat}.jpg',
                           height: 180,
                           fit: BoxFit.scaleDown,
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Swing(
                               infinite: true,
@@ -53,7 +53,6 @@ class DetailPage extends StatelessWidget {
                                 heightFactor: 2,
                                 child: Image.network(
                                   Common().baseUrlLoadingCats,
-
                                   width: 70,
                                 ),
                               ),
@@ -71,11 +70,9 @@ class DetailPage extends StatelessWidget {
                         children: [
                           Text(
                             'Origin: ${_.catDetail?.breeds.first.origin ?? ''}',
-
                           ),
                           Text(
                             'Intelligence: ${_.catDetail?.breeds.first.intelligence ?? ''}',
-
                           ),
                         ],
                       ),
@@ -84,21 +81,18 @@ class DetailPage extends StatelessWidget {
                       ),
                       Text(
                         'Life Span: ${_.catDetail?.breeds.first.lifeSpan ?? ''}',
-
                       ),
                       const SizedBox(
                         height: 12,
                       ),
                       Text(
                         'temperament: ${_.catDetail?.breeds.first.temperament ?? ''}',
-
                       ),
                       const SizedBox(
                         height: 12,
                       ),
                       Text(
                         'Description: ${_.catDetail?.breeds.first.description ?? ''}',
-
                       ),
                     ],
                   ),
