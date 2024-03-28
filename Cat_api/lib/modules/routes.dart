@@ -1,7 +1,7 @@
 import 'package:cat_api/widgets/side_page/main_page.dart';
 
-import '../widgets/home_page.dart';
-import '../widgets/detail_page.dart';
+import '../widgets/side_page/home_page.dart';
+import '../widgets/side_page/detail_page.dart';
 import '../widgets/side_page/login.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart' as route;

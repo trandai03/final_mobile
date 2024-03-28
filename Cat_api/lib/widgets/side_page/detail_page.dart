@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
-import '../modules/common.dart';
-import '../controllers/detail_controller.dart';
+import '../../modules/common.dart';
+import '../../controllers/detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';

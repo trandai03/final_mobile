@@ -4,7 +4,7 @@ import 'package:cat_api/widgets/side_page/main_page.dart';
 
 import 'modules/routes.dart';
 import 'package:get/get.dart';
-import 'package:cat_api/widgets/home_page.dart';
+import 'package:cat_api/widgets/side_page/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
