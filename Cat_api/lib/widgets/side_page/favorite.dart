@@ -1,11 +1,9 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cat_api/widgets/side_page/search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletons/skeletons.dart';
-import '../../controllers/homeController.dart';
+
 import '../../modules/breeds.dart';
 import '../../modules/common.dart';
 import '../../modules/network.dart';
@@ -41,8 +39,7 @@ class _Favorite_State extends State<Favorite_page> {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<List<CatBreeds>>(
-          future:
-              _listBreedSearch.getListBreedSearch(query: query, params: params),
+          future: null,
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (!snapshot.hasData) {
