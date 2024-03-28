@@ -42,6 +42,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  int currentPageIndex = 0;
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.alwaysShow;
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       init: HomeController(),
@@ -55,6 +58,30 @@ class _HomePageState extends State<HomePage> {
                     showSearch(context: context, delegate: SearchCat());
                   },
                   icon: Icon(Icons.search))
+            ],
+          ),
+          bottomNavigationBar: NavigationBar(
+            labelBehavior: labelBehavior,
+            selectedIndex: currentPageIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
+            },
+            destinations: const <Widget>[
+              NavigationDestination(
+                icon: Icon(Icons.explore),
+                label: 'Explore',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.commute),
+                label: 'Commute',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.bookmark),
+                icon: Icon(Icons.bookmark_border),
+                label: 'Saved',
+              ),
             ],
           ),
           body: Padding(

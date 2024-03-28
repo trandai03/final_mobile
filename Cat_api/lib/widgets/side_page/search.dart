@@ -55,9 +55,7 @@ class SearchCat extends SearchDelegate {
   Widget _buildCards(int index, CatBreeds? catbreeds) {
     return InkWell(
       onTap: () {
-        print(catbreeds);
-        print(catbreeds?.name);
-        print(catbreeds?.referenceImageId);
+    
         Get.toNamed('/detail_cat',
             arguments: {'id': catbreeds?.referenceImageId ?? ''});
       },
