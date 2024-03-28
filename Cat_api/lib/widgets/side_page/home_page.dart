@@ -5,9 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
-import '../controllers/homeController.dart';
-import '../modules/breeds.dart';
-import '../modules/common.dart';
+import '../../controllers/homeController.dart';
+import '../../modules/breeds.dart';
+import '../../modules/common.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

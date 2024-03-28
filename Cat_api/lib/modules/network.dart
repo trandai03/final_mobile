@@ -158,4 +158,42 @@ class Network {
     }
     return result;
   }
+
+  List<CatBreeds> result_favorite = [];
+  Future<List<CatBreeds>> getListBreedFavorite(
+      {Map<String, dynamic> params = const {}, List<String>? id}) async {
+    String content = (params.keys
+            .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
+        .join('&');
+    final Map<String, String> headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': utf8.encode(content).length.toString(),
+      'x-api-key': Common().apiKey,
+    };
+    id!.forEach((element) async {
+      try {
+        debugPrint('-> ${Common().baseUrl + EndPoints().breeds}?$content');
+        await http
+            .get(
+          headers: headers,
+          Uri.parse('${Common().baseUrlDetail + element}?$content'),
+        )
+            .then((response) {
+          if (response.statusCode == 200) {
+            data = json.decode(response.body);
+            result_favorite = data.map((e) => CatBreeds.fromJson(e)).toList();
+          } else {
+            result_favorite = [];
+            debugPrint('Loi ket noi:');
+            debugPrint(response.statusCode.toString());
+          }
+        });
+      } catch (e) {
+        debugPrint('Loi ket noi:');
+        debugPrint(e.toString());
+        return null;
+      }
+    });
+    return result_favorite;
+  }
 }
