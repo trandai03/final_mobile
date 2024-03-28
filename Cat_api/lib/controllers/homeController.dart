@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     _getBreeds();
-    _getBreedsSearch(querySearch);
+
     super.onInit();
   }
 
@@ -33,22 +33,6 @@ class HomeController extends GetxController {
 
     if (response != null) {
       _myListBreeds = response;
-    }
-
-    _isLoading = false;
-    update();
-  }
-
-  void _getBreedsSearch(String query) async {
-    _isLoading = true;
-    update();
-    Map<String, String> params = {};
-
-    final network = Network();
-    var response =
-        await network.getListBreeds(params: params, query: querySearch);
-    if (response != null) {
-      _myListBreedsSearch = response;
     }
 
     _isLoading = false;

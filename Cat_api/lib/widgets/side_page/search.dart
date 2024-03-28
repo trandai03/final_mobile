@@ -2,9 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cat_api/modules/network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletons/skeletons.dart';
-import '../../controllers/search_controller.dart';
-import '../../controllers/homeController.dart';
+
 import '../../modules/breeds.dart';
 import '../../modules/common.dart';
 
@@ -47,10 +45,8 @@ class SearchCat extends SearchDelegate {
             return ListView.builder(
                 itemCount: data?.length,
                 itemBuilder: (context, index) {
-                  if (data?[index] != null) {
-                    CatBreeds? cat = data?[index];
-                    return _buildCards(index + 1, cat);
-                  }
+                  CatBreeds? cat = data?[index];
+                  return _buildCards(index + 1, cat);
                 });
           }),
     );
@@ -59,7 +55,11 @@ class SearchCat extends SearchDelegate {
   Widget _buildCards(int index, CatBreeds? catbreeds) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/detail_cat', arguments: {'id': catbreeds?.id});
+        print(catbreeds);
+        print(catbreeds?.name);
+        print(catbreeds?.referenceImageId);
+        Get.toNamed('/detail_cat',
+            arguments: {'id': catbreeds?.referenceImageId ?? ''});
       },
       child: Card(
         elevation: 5,

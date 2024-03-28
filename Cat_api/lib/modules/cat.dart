@@ -6,11 +6,11 @@ CatBreedsImage catBreedsImageFromJson(String str) =>
 String catBreedsImageToJson(CatBreedsImage data) => json.encode(data.toJson());
 
 class CatBreedsImage {
-  String id;
-  String url;
+  String? id;
+  String? url;
   List<Breed> breeds;
-  int width;
-  int height;
+  int? width;
+  int? height;
 
   CatBreedsImage({
     required this.id,
@@ -38,181 +38,184 @@ class CatBreedsImage {
 }
 
 class Breed {
-  Weight weight;
-  String id;
-  String name;
-  String cfaUrl;
-  String vetstreetUrl;
-  String vcahospitalsUrl;
-  String temperament;
-  String origin;
-  String countryCodes;
-  String countryCode;
-  String description;
-  String lifeSpan;
-  int indoor;
-  int lap;
-  String altNames;
-  int adaptability;
-  int affectionLevel;
-  int childFriendly;
-  int dogFriendly;
-  int energyLevel;
-  int grooming;
-  int healthIssues;
-  int intelligence;
-  int sheddingLevel;
-  int socialNeeds;
-  int strangerFriendly;
-  int vocalisation;
-  int experimental;
-  int hairless;
-  int natural;
-  int rare;
-  int rex;
-  int suppressedTail;
-  int shortLegs;
-  String wikipediaUrl;
-  int hypoallergenic;
-  String referenceImageId;
+  Weight? weight;
+  String? id;
+  String? name;
+  String? cfaUrl;
+  String? vetstreetUrl;
+  String? vcahospitalsUrl;
+  String? temperament;
+  String? origin;
+  String? countryCodes;
+  String? countryCode;
+  String? description;
+  String? lifeSpan;
+  int? indoor;
+  int? lap;
+  String? altNames;
+  int? adaptability;
+  int? affectionLevel;
+  int? childFriendly;
+  int? dogFriendly;
+  int? energyLevel;
+  int? grooming;
+  int? healthIssues;
+  int? intelligence;
+  int? sheddingLevel;
+  int? socialNeeds;
+  int? strangerFriendly;
+  int? vocalisation;
+  int? experimental;
+  int? hairless;
+  int? natural;
+  int? rare;
+  int? rex;
+  int? suppressedTail;
+  int? shortLegs;
+  String? wikipediaUrl;
+  int? hypoallergenic;
+  String? referenceImageId;
 
-  Breed({
-    required this.weight,
-    required this.id,
-    required this.name,
-    required this.cfaUrl,
-    required this.vetstreetUrl,
-    required this.vcahospitalsUrl,
-    required this.temperament,
-    required this.origin,
-    required this.countryCodes,
-    required this.countryCode,
-    required this.description,
-    required this.lifeSpan,
-    required this.indoor,
-    required this.lap,
-    required this.altNames,
-    required this.adaptability,
-    required this.affectionLevel,
-    required this.childFriendly,
-    required this.dogFriendly,
-    required this.energyLevel,
-    required this.grooming,
-    required this.healthIssues,
-    required this.intelligence,
-    required this.sheddingLevel,
-    required this.socialNeeds,
-    required this.strangerFriendly,
-    required this.vocalisation,
-    required this.experimental,
-    required this.hairless,
-    required this.natural,
-    required this.rare,
-    required this.rex,
-    required this.suppressedTail,
-    required this.shortLegs,
-    required this.wikipediaUrl,
-    required this.hypoallergenic,
-    required this.referenceImageId,
-  });
+  Breed(
+      {this.weight,
+      this.id,
+      this.name,
+      this.cfaUrl,
+      this.vetstreetUrl,
+      this.vcahospitalsUrl,
+      this.temperament,
+      this.origin,
+      this.countryCodes,
+      this.countryCode,
+      this.description,
+      this.lifeSpan,
+      this.indoor,
+      this.lap,
+      this.altNames,
+      this.adaptability,
+      this.affectionLevel,
+      this.childFriendly,
+      this.dogFriendly,
+      this.energyLevel,
+      this.grooming,
+      this.healthIssues,
+      this.intelligence,
+      this.sheddingLevel,
+      this.socialNeeds,
+      this.strangerFriendly,
+      this.vocalisation,
+      this.experimental,
+      this.hairless,
+      this.natural,
+      this.rare,
+      this.rex,
+      this.suppressedTail,
+      this.shortLegs,
+      this.wikipediaUrl,
+      this.hypoallergenic,
+      this.referenceImageId});
 
-  factory Breed.fromJson(Map<String, dynamic> json) => Breed(
-        weight: Weight.fromJson(json["weight"]),
-        id: json["id"],
-        name: json["name"],
-        cfaUrl: json["cfa_url"],
-        vetstreetUrl: json["vetstreet_url"],
-        vcahospitalsUrl: json["vcahospitals_url"],
-        temperament: json["temperament"],
-        origin: json["origin"],
-        countryCodes: json["country_codes"],
-        countryCode: json["country_code"],
-        description: json["description"],
-        lifeSpan: json["life_span"],
-        indoor: json["indoor"],
-        lap: json["lap"],
-        altNames: json["alt_names"],
-        adaptability: json["adaptability"],
-        affectionLevel: json["affection_level"],
-        childFriendly: json["child_friendly"],
-        dogFriendly: json["dog_friendly"],
-        energyLevel: json["energy_level"],
-        grooming: json["grooming"],
-        healthIssues: json["health_issues"],
-        intelligence: json["intelligence"],
-        sheddingLevel: json["shedding_level"],
-        socialNeeds: json["social_needs"],
-        strangerFriendly: json["stranger_friendly"],
-        vocalisation: json["vocalisation"],
-        experimental: json["experimental"],
-        hairless: json["hairless"],
-        natural: json["natural"],
-        rare: json["rare"],
-        rex: json["rex"],
-        suppressedTail: json["suppressed_tail"],
-        shortLegs: json["short_legs"],
-        wikipediaUrl: json["wikipedia_url"],
-        hypoallergenic: json["hypoallergenic"],
-        referenceImageId: json["reference_image_id"],
-      );
+  Breed.fromJson(Map<String, dynamic> json) {
+    weight =
+        json['weight'] != null ? new Weight.fromJson(json['weight']) : null;
+    id = json['id'];
+    name = json['name'];
+    cfaUrl = json['cfa_url'];
+    vetstreetUrl = json['vetstreet_url'];
+    vcahospitalsUrl = json['vcahospitals_url'];
+    temperament = json['temperament'];
+    origin = json['origin'];
+    countryCodes = json['country_codes'];
+    countryCode = json['country_code'];
+    description = json['description'];
+    lifeSpan = json['life_span'];
+    indoor = json['indoor'];
+    lap = json['lap'];
+    altNames = json['alt_names'];
+    adaptability = json['adaptability'];
+    affectionLevel = json['affection_level'];
+    childFriendly = json['child_friendly'];
+    dogFriendly = json['dog_friendly'];
+    energyLevel = json['energy_level'];
+    grooming = json['grooming'];
+    healthIssues = json['health_issues'];
+    intelligence = json['intelligence'];
+    sheddingLevel = json['shedding_level'];
+    socialNeeds = json['social_needs'];
+    strangerFriendly = json['stranger_friendly'];
+    vocalisation = json['vocalisation'];
+    experimental = json['experimental'];
+    hairless = json['hairless'];
+    natural = json['natural'];
+    rare = json['rare'];
+    rex = json['rex'];
+    suppressedTail = json['suppressed_tail'];
+    shortLegs = json['short_legs'];
+    wikipediaUrl = json['wikipedia_url'];
+    hypoallergenic = json['hypoallergenic'];
+    referenceImageId = json['reference_image_id'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "weight": weight.toJson(),
-        "id": id,
-        "name": name,
-        "cfa_url": cfaUrl,
-        "vetstreet_url": vetstreetUrl,
-        "vcahospitals_url": vcahospitalsUrl,
-        "temperament": temperament,
-        "origin": origin,
-        "country_codes": countryCodes,
-        "country_code": countryCode,
-        "description": description,
-        "life_span": lifeSpan,
-        "indoor": indoor,
-        "lap": lap,
-        "alt_names": altNames,
-        "adaptability": adaptability,
-        "affection_level": affectionLevel,
-        "child_friendly": childFriendly,
-        "dog_friendly": dogFriendly,
-        "energy_level": energyLevel,
-        "grooming": grooming,
-        "health_issues": healthIssues,
-        "intelligence": intelligence,
-        "shedding_level": sheddingLevel,
-        "social_needs": socialNeeds,
-        "stranger_friendly": strangerFriendly,
-        "vocalisation": vocalisation,
-        "experimental": experimental,
-        "hairless": hairless,
-        "natural": natural,
-        "rare": rare,
-        "rex": rex,
-        "suppressed_tail": suppressedTail,
-        "short_legs": shortLegs,
-        "wikipedia_url": wikipediaUrl,
-        "hypoallergenic": hypoallergenic,
-        "reference_image_id": referenceImageId,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.weight != null) {
+      data['weight'] = this.weight!.toJson();
+    }
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['cfa_url'] = this.cfaUrl;
+    data['vetstreet_url'] = this.vetstreetUrl;
+    data['vcahospitals_url'] = this.vcahospitalsUrl;
+    data['temperament'] = this.temperament;
+    data['origin'] = this.origin;
+    data['country_codes'] = this.countryCodes;
+    data['country_code'] = this.countryCode;
+    data['description'] = this.description;
+    data['life_span'] = this.lifeSpan;
+    data['indoor'] = this.indoor;
+    data['lap'] = this.lap;
+    data['alt_names'] = this.altNames;
+    data['adaptability'] = this.adaptability;
+    data['affection_level'] = this.affectionLevel;
+    data['child_friendly'] = this.childFriendly;
+    data['dog_friendly'] = this.dogFriendly;
+    data['energy_level'] = this.energyLevel;
+    data['grooming'] = this.grooming;
+    data['health_issues'] = this.healthIssues;
+    data['intelligence'] = this.intelligence;
+    data['shedding_level'] = this.sheddingLevel;
+    data['social_needs'] = this.socialNeeds;
+    data['stranger_friendly'] = this.strangerFriendly;
+    data['vocalisation'] = this.vocalisation;
+    data['experimental'] = this.experimental;
+    data['hairless'] = this.hairless;
+    data['natural'] = this.natural;
+    data['rare'] = this.rare;
+    data['rex'] = this.rex;
+    data['suppressed_tail'] = this.suppressedTail;
+    data['short_legs'] = this.shortLegs;
+    data['wikipedia_url'] = this.wikipediaUrl;
+    data['hypoallergenic'] = this.hypoallergenic;
+    data['reference_image_id'] = this.referenceImageId;
+    return data;
+  }
 }
 
 class Weight {
-  String imperial;
-  String metric;
+  String? imperial;
+  String? metric;
 
-  Weight({
-    required this.imperial,
-    required this.metric,
-  });
+  Weight({this.imperial, this.metric});
 
-  factory Weight.fromJson(Map<String, dynamic> json) => Weight(
-        imperial: json["imperial"],
-        metric: json["metric"],
-      );
+  Weight.fromJson(Map<String, dynamic> json) {
+    imperial = json['imperial'];
+    metric = json['metric'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "imperial": imperial,
-        "metric": metric,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['imperial'] = this.imperial;
+    data['metric'] = this.metric;
+    return data;
+  }
 }
