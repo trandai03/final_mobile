@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cat_api/widgets/side_page/search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
@@ -17,6 +19,29 @@ class _HomePageState extends State<HomePage> {
   List<CatBreeds> BreedData = <CatBreeds>[];
 
   @override
+  final user = FirebaseAuth.instance.currentUser!;
+  Future addCatFavorite(String id, String email) async {
+    await FirebaseFirestore.instance.collection('cat_favorite').add({
+      'id': id,
+      'email': email,
+    });
+  }
+
+  Future<void> removeCatFavorite(String id) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('cat_favorite')
+          .where('id', isEqualTo: id)
+          .get();
+
+      querySnapshot.docs.forEach((doc) {
+        doc.reference.delete();
+      });
+    } catch (e) {
+      print('Error removing cat favorite: $e');
+    }
+  }
+
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       init: HomeController(),
@@ -82,6 +107,12 @@ class _HomePageState extends State<HomePage> {
                             catbreeds.isFavorited = true;
                           }
                         });
+                        if (catbreeds.isFavorited == true) {
+                          addCatFavorite(
+                              catbreeds.referenceImageId ?? '', user.email!);
+                        } else {
+                          removeCatFavorite(catbreeds.referenceImageId ?? '');
+                        }
                       },
                       icon: Icon(
                         catbreeds.isFavorited
