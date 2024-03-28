@@ -3,14 +3,12 @@ import 'package:cat_api/widgets/side_page/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
-
 import '../controllers/homeController.dart';
 import '../modules/breeds.dart';
 import '../modules/common.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -69,8 +67,30 @@ class _HomePageState extends State<HomePage> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Name:  ${catbreeds.name}',
+              Row(
+                children: [
+                  Text(
+                    'Name:  ${catbreeds.name}',
+                  ),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          if (catbreeds.isFavorited == true) {
+                            catbreeds.isFavorited = false;
+                          } else {
+                            catbreeds.isFavorited = true;
+                          }
+                        });
+                      },
+                      icon: Icon(
+                        catbreeds.isFavorited
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined,
+                        color:
+                            catbreeds.isFavorited ? Colors.red : Colors.black,
+                      ))
+                ],
               ),
               const SizedBox(
                 height: 12,
