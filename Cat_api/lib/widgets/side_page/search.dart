@@ -42,6 +42,7 @@ class SearchCat extends SearchDelegate {
                 child: CircularProgressIndicator(),
               );
             }
+
             return ListView.builder(
                 itemCount: data?.length,
                 itemBuilder: (context, index) {
@@ -55,7 +56,6 @@ class SearchCat extends SearchDelegate {
   Widget _buildCards(int index, CatBreeds? catbreeds) {
     return InkWell(
       onTap: () {
-    
         Get.toNamed('/detail_cat',
             arguments: {'id': catbreeds?.referenceImageId ?? ''});
       },

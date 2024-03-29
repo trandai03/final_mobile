@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:web/helpers.dart';
 
 import '../modules/breeds.dart';
 import '../modules/cat.dart';
@@ -100,6 +101,8 @@ class Network {
           var catDetailResponse = CatBreedsImage.fromJson(
               jsonDecode(response.body.replaceAll('\'', '')));
           catDetail = catDetailResponse;
+          print(catDetailResponse);
+          print(catDetail);
         } else {
           catDetail = null;
           debugPrint('Loi call Api 1:');
@@ -159,8 +162,8 @@ class Network {
     return result;
   }
 
-  List<CatBreeds> result_favorite = [];
-  Future<List<CatBreeds>> getListBreedFavorite(
+  List<CatBreedsImage> result_favorite = [];
+  Future<List<CatBreedsImage>> getListBreedFavorite(
       {Map<String, dynamic> params = const {}, List<String>? id}) async {
     String content = (params.keys
             .map((key) => '$key=${Uri.encodeQueryComponent(params[key])}'))
@@ -170,20 +173,23 @@ class Network {
       'Content-Length': utf8.encode(content).length.toString(),
       'x-api-key': Common().apiKey,
     };
-    id!.forEach((element) async {
+    for (var item in id!) {
       try {
-        debugPrint('-> ${Common().baseUrl + EndPoints().breeds}?$content');
+        CatBreedsImage cat;
+        debugPrint('-> ${Common().baseUrlDetail + item}?$content');
         await http
             .get(
           headers: headers,
-          Uri.parse('${Common().baseUrlDetail + element}?$content'),
+          Uri.parse('${Common().baseUrlDetail + item}?$content'),
         )
             .then((response) {
           if (response.statusCode == 200) {
-            data = json.decode(response.body);
-            result_favorite = data.map((e) => CatBreeds.fromJson(e)).toList();
+            var catDetailResponse = CatBreedsImage.fromJson(
+                jsonDecode(response.body.replaceAll('\'', '')));
+            cat = catDetailResponse;
+
+            result_favorite.add(cat);
           } else {
-            result_favorite = [];
             debugPrint('Loi ket noi:');
             debugPrint(response.statusCode.toString());
           }
@@ -191,9 +197,11 @@ class Network {
       } catch (e) {
         debugPrint('Loi ket noi:');
         debugPrint(e.toString());
-        return null;
+        return [];
       }
-    });
+    }
+    ;
+    print(result_favorite);
     return result_favorite;
   }
 }
