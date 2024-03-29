@@ -1,3 +1,6 @@
+import 'package:cat_api/widgets/navigation.dart';
+import 'package:cat_api/widgets/side_page/change_info.dart';
+import 'package:cat_api/widgets/side_page/change_password.dart';
 import 'package:cat_api/widgets/side_page/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,17 +30,6 @@ class _SettingPageState extends State<SettingPage> {
         title: Text(
           "Setting",
           style: TextStyle(fontSize: 22, color: Colors.white),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return HomePage();
-            }));
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
         ),
       ),
       body: Container(
@@ -69,8 +61,8 @@ class _SettingPageState extends State<SettingPage> {
             SizedBox(
               height: 10,
             ),
-            buildAccountOption(context, "Change Password"),
-            buildAccountOption(context, "Change Information"),
+            buildAccountOption1(context, "Change Password"),
+            buildAccountOption2(context, "Change Information"),
             buildAccountOption(context, "Privacy and Security"),
             SizedBox(
               height: 40,
@@ -158,6 +150,64 @@ Padding buildNoticationOption(
 GestureDetector buildAccountOption(BuildContext context, String title) {
   return GestureDetector(
     onTap: () {},
+    child: Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[600]),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+GestureDetector buildAccountOption1(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ChangePassWord();
+      }));
+    },
+    child: Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[600]),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+GestureDetector buildAccountOption2(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ChangeInfoPage();
+      }));
+    },
     child: Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       child: Row(

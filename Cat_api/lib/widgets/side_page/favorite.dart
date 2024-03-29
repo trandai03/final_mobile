@@ -93,8 +93,24 @@ class _Favorite_State extends State<Favorite_page> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Name:  ${catbreeds?.breeds.first.name}',
+              Row(
+                children: [
+                  Text(
+                    'Name:  ${catbreeds?.breeds.first.name}',
+                  ),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          removeCatFavorite(
+                              catbreeds?.breeds.first.referenceImageId ?? '');
+                        });
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ))
+                ],
               ),
               const SizedBox(
                 height: 12,
