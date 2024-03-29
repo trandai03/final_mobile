@@ -1,6 +1,6 @@
 import 'package:cat_api/widgets/side_page/favorite.dart';
 import 'package:cat_api/widgets/side_page/home_page.dart';
-import 'package:cat_api/widgets/sign.dart';
+import 'package:cat_api/widgets/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,5 +41,9 @@ class NavigationBarApp extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs;
-  final screens = [const HomePage(), const Favorite_page(), const SignPage()];
+  final screens = [
+    const HomePage(),
+    const Favorite_page(),
+    const SettingPage()
+  ];
 }

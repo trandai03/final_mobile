@@ -18,6 +18,23 @@ class _Favorite_State extends State<Favorite_page> {
   List<CatBreeds> BreedData = <CatBreeds>[];
   @override
   final user = FirebaseAuth.instance.currentUser!;
+  List<String> id_list = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchID();
+  }
+
+  _fetchID() async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('cat_favorite').get();
+    final snap = snapshot.docs;
+    setState(() {
+      id_list = snap.map((doc) => doc['id'] as String).toList();
+    });
+    print(id_list);
+  }
 
   Future<void> removeCatFavorite(String id) async {
     try {
