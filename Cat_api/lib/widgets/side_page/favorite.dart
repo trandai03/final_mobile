@@ -3,10 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../modules/network.dart';
 import '../../modules/breeds.dart';
 import '../../modules/common.dart';
 import '../../modules/network.dart';
+import '../../modules/cat.dart';
 
 class Favorite_page extends StatefulWidget {
   const Favorite_page({super.key});
@@ -51,12 +52,13 @@ class _Favorite_State extends State<Favorite_page> {
     }
   }
 
-  Network _listBreedSearch = Network();
+  Network _getListBreedFavorite = Network();
   Map<String, String> params = {};
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<List<CatBreeds>>(
-          future: null,
+      child: FutureBuilder<List<CatBreedsImage>>(
+          future: _getListBreedFavorite.getListBreedFavorite(
+              id: id_list, params: params),
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (!snapshot.hasData) {
@@ -64,24 +66,24 @@ class _Favorite_State extends State<Favorite_page> {
                 child: CircularProgressIndicator(),
               );
             }
+            print(data?.length);
+            print("10");
             return ListView.builder(
                 itemCount: data?.length,
                 itemBuilder: (context, index) {
-                  CatBreeds? cat = data?[index];
+                  CatBreedsImage? cat = data?[index];
                   return _buildCards(index + 1, cat);
                 });
           }),
     );
   }
 
-  Widget _buildCards(int index, CatBreeds? catbreeds) {
+  Widget _buildCards(int index, CatBreedsImage? catbreeds) {
+    print("1");
     return InkWell(
       onTap: () {
-        print(catbreeds);
-        print(catbreeds?.name);
-        print(catbreeds?.referenceImageId);
         Get.toNamed('/detail_cat',
-            arguments: {'id': catbreeds?.referenceImageId ?? ''});
+            arguments: {'id': catbreeds?.breeds.first.referenceImageId ?? ''});
       },
       child: Card(
         elevation: 5,
@@ -92,14 +94,14 @@ class _Favorite_State extends State<Favorite_page> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Name:  ${catbreeds?.name}',
+                'Name:  ${catbreeds?.breeds.first.name}',
               ),
               const SizedBox(
                 height: 12,
               ),
               Center(
                 child: Image.network(
-                  '${Common().baseUrlImageCats}${catbreeds?.referenceImageId}.jpg',
+                  '${Common().baseUrlImageCats}${catbreeds?.breeds.first.referenceImageId}.jpg',
                   height: 180,
                   fit: BoxFit.scaleDown,
                   loadingBuilder: (BuildContext context, Widget child,
@@ -127,10 +129,10 @@ class _Favorite_State extends State<Favorite_page> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Origin: ${catbreeds?.origin}',
+                    'Origin: ${catbreeds?.breeds.first.origin}',
                   ),
                   Text(
-                    'Intelligent: ${catbreeds?.intelligence}',
+                    'Intelligent: ${catbreeds?.breeds.first.intelligence}',
                   ),
                 ],
               ),
