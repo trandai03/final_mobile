@@ -43,9 +43,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  int currentPageIndex = 0;
-  NavigationDestinationLabelBehavior labelBehavior =
-      NavigationDestinationLabelBehavior.alwaysShow;
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       init: HomeController(),
