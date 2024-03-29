@@ -34,7 +34,7 @@ class SearchCat extends SearchDelegate {
     return Container(
       child: FutureBuilder<List<CatBreeds>>(
           future:
-              _listBreedSearch.getListBreedSearch(query: query, params: params),
+          _listBreedSearch.getListBreedSearch(query: query, params: params),
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (!snapshot.hasData) {
@@ -55,7 +55,7 @@ class SearchCat extends SearchDelegate {
   Widget _buildCards(int index, CatBreeds? catbreeds) {
     return InkWell(
       onTap: () {
-    
+
         Get.toNamed('/detail_cat',
             arguments: {'id': catbreeds?.referenceImageId ?? ''});
       },
