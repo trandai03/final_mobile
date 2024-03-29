@@ -7,7 +7,6 @@ String catBreedsToJson(List<CatBreeds> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CatBreeds {
-  bool isFavorited;
   Weight weight;
   String id;
   String name;
@@ -49,7 +48,6 @@ class CatBreeds {
   int? bidability;
 
   CatBreeds({
-    this.isFavorited = false,
     required this.weight,
     required this.id,
     required this.name,

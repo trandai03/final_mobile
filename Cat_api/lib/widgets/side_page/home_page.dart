@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletons/skeletons.dart';
-
 import '../../controllers/homeController.dart';
 import '../../modules/breeds.dart';
 import '../../modules/common.dart';
@@ -18,7 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<CatBreeds> BreedData = <CatBreeds>[];
-
   @override
   final user = FirebaseAuth.instance.currentUser!;
   Future addCatFavorite(String id, String email) async {
@@ -28,11 +26,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future<void> removeCatFavorite(String id) async {
+  Future<void> removeCatFavorite(String email) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('cat_favorite')
-          .where('id', isEqualTo: id)
+          .where('email', isEqualTo: email)
           .get();
 
       querySnapshot.docs.forEach((doc) {
@@ -104,26 +102,12 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   IconButton(
                       onPressed: () {
-                        setState(() {
-                          if (catbreeds.isFavorited == true) {
-                            catbreeds.isFavorited = false;
-                          } else {
-                            catbreeds.isFavorited = true;
-                          }
-                        });
-                        if (catbreeds.isFavorited == true) {
-                          addCatFavorite(
-                              catbreeds.referenceImageId ?? '', user.email!);
-                        } else {
-                          removeCatFavorite(catbreeds.referenceImageId ?? '');
-                        }
+                        addCatFavorite(
+                            catbreeds.referenceImageId ?? '', user.email!);
                       },
                       icon: Icon(
-                        catbreeds.isFavorited
-                            ? Icons.favorite
-                            : Icons.favorite_border_outlined,
-                        color:
-                            catbreeds.isFavorited ? Colors.red : Colors.black,
+                        Icons.favorite,
+                        color: Colors.red,
                       ))
                 ],
               ),
