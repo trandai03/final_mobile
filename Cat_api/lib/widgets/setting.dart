@@ -67,32 +67,6 @@ class _SettingPageState extends State<SettingPage> {
             SizedBox(
               height: 40,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.volume_up_outlined,
-                  color: Colors.blue,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Notifications",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            Divider(
-              height: 20,
-              thickness: 1,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            buildNoticationOption("Theme Dark", valNotify1, onChangeFunction1),
-            SizedBox(
-              height: 50,
-            ),
             Center(
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(

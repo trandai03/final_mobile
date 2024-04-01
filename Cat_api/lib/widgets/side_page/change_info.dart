@@ -54,7 +54,7 @@ class _ChangeInfoPageState extends State<ChangeInfoPage> {
         elevation: 0,
         title: Center(
             child: Text(
-          'Change Password',
+          'Change Information',
           style: TextStyle(color: Colors.white),
         )),
       ),
